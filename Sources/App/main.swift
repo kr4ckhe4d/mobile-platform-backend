@@ -10,11 +10,14 @@ drop.preparations.append(User.self)
 drop.preparations.append(Store.self)
 drop.preparations.append(Product.self)
 drop.preparations.append(Deal.self)
+drop.preparations.append(Order.self)
+drop.preparations.append(OrderItem.self)
 
 let userController = UserController()
 let storeController = StoreController()
 let dealController = DealController()
 let productController = ProductController()
+let orderController = OrderController()
 
 drop.group("api") { api in
     api.group("v1") { v1 in
@@ -37,11 +40,18 @@ drop.group("api") { api in
         
         v1.get("search", handler: productController.search)
         
+        v1.get("orders", handler: orderController.orders)
+        
+        v1.get("orders", ":order_id" , handler: orderController.order)
+        
+        v1.get("orders", "checkout", handler: orderController.checkout)
+        
         v1.get("seed") { request in
             try User.seed()
             try Store.seed()
             try Product.seed()
             try Deal.seed()
+            try Order.seed()
             
             return JSON(["status" : true])
         }

@@ -72,7 +72,9 @@ final class User: Model {
     }
     
     static func seed() throws {
+        var user = User(fname: "Dihara", lname: "Wijetunga", email: "dihara@gmail.com", password: "test", dob: "22/10/1994", street_address: "24, rampart cross road, ethul kotte", country: "Sri lanka", city: "Colombo", postal: 10100, contact_no: 0718695696)
         
+        try user.save()
     }
     
     static func findByCredentials(email: String, password: String) throws -> User? {
@@ -105,4 +107,9 @@ extension User: Preparation {
     static func revert(_ database: Database) throws {
         try database.delete("users")
     }
+    
+    func orders() throws -> Children<Order> {
+        return try children()
+    }
+
 }

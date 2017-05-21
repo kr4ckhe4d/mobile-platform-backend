@@ -8,6 +8,7 @@ final class Product: Model {
     var desc: String
     var price: Int
     var img_path: String
+    var tags: String
     var stock: Int
     var store_id: Node?
     
@@ -15,11 +16,13 @@ final class Product: Model {
          desc: String,
          price: Int,
          img_path: String,
+         tags: String,
          stock: Int) {
         self.name           = name
         self.desc           = desc
         self.price          = price
         self.img_path       = img_path
+        self.tags           = tags
         self.stock          = stock
     }
     
@@ -29,6 +32,7 @@ final class Product: Model {
         self.desc           = try node.extract("desc")
         self.price          = try node.extract("price")
         self.img_path       = try node.extract("img_path")
+        self.tags           = try node.extract("tags")
         self.stock          = try node.extract("stock")
         self.store_id       = try node.extract("store_id")
     }
@@ -40,6 +44,7 @@ final class Product: Model {
             "desc"         : desc,
             "price"        : price,
             "img_path"     : img_path,
+            "tags"         : tags,
             "stock"        : stock,
             "store_id"     : store_id
             ])
@@ -50,14 +55,28 @@ final class Product: Model {
         
         for store in stores {
             
-            for index in 1...10 {
+            for index in 1...5 {
                 let name = "Product" + String.init(index)
                 let desc = "blah blah blah"
                 let price = 123 * index
                 let img = "assdasads.png"
                 let stock = 123
+                let tags = "cloths-food-travel"
                 
-                var product = Product(name: name, desc: desc, price: price, img_path: img, stock: stock)
+                var product = Product(name: name, desc: desc, price: price, img_path: img, tags: tags, stock: stock)
+                product.store_id = store.id
+                try product.save()
+            }
+            
+            for index in 1...5 {
+                let name = "Product" + String.init(index * index)
+                let desc = "asdasd lololoolololo"
+                let price = 123 * index
+                let img = "assdasads.png"
+                let stock = 123
+                let tags = "tech-computer-cpu-pc"
+                
+                var product = Product(name: name, desc: desc, price: price, img_path: img, tags: tags, stock: stock)
                 product.store_id = store.id
                 try product.save()
             }
@@ -76,6 +95,10 @@ final class Product: Model {
     static func findByDescKeyword(keyword: String) throws -> Query<Product> {
         return try query().filter("desc", .contains, keyword)
     }
+    
+    static func findByTag(tag: String) throws -> Query<Product> {
+        return try query().filter("tags", .contains, tag)
+    }
 }
 
 extension Product: Preparation {
@@ -87,6 +110,7 @@ extension Product: Preparation {
             products.string("desc")
             products.int("price")
             products.string("img_path")
+            products.string("tags")
             products.int("stock")
             products.parent(Store.self, optional: false)
         }

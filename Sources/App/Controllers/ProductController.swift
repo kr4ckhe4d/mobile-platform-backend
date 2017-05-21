@@ -9,6 +9,7 @@
 import Vapor
 import Routing
 import HTTP
+import Fluent
 
 final class ProductController {
     
@@ -30,8 +31,31 @@ final class ProductController {
             return try combined.makeJSON()
         }
         
-        if let keyword = request.data["tag"]?.string {
+        if let tagString = request.data["tag"]?.string {
+            let tags = tagString.components(separatedBy: "-")
+            var results: [Product] = []
             
+            for tag in tags {
+                let queryResults = try Product.findByTag(tag: tag).run()
+                
+                for queryResult in queryResults {
+                    
+                    var shouldAdd: Bool = true
+                    
+                    // Iterate over the results to check if this product has been retrieved already.
+                    for result in results {
+                        if result.id == queryResult.id {
+                            shouldAdd = false
+                        }
+                    }
+                    
+                    if shouldAdd == true {
+                        results.append(queryResult)
+                    }
+                }
+            }
+            
+            return try results.makeJSON()
         }
         
         return try Response(status: .badRequest, json: JSON(["error" : "No Keyword!"]))

@@ -14,6 +14,7 @@ drop.preparations.append(Deal.self)
 let userController = UserController()
 let storeController = StoreController()
 let dealController = DealController()
+let productController = ProductController()
 
 drop.group("api") { api in
     api.group("v1") { v1 in
@@ -33,6 +34,8 @@ drop.group("api") { api in
         v1.get("stores", ":store_id", "deals", handler: storeController.deals)
         
         v1.get("deals", handler: dealController.deals)
+        
+        v1.get("search", handler: productController.search)
         
         v1.get("seed") { request in
             try User.seed()

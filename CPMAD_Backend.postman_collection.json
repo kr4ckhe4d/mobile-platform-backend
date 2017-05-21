@@ -12,7 +12,10 @@
 		"021da6f6-32ec-e8b1-b190-4bbf7177093f",
 		"f37cedcf-1047-32a5-c2e1-a66a0e85d4fa",
 		"0b47010f-fc4e-1203-9131-33c0cc0a33e9",
-		"52335503-dbc7-a623-271d-fdc501353f63"
+		"52335503-dbc7-a623-271d-fdc501353f63",
+		"5aa09429-3853-4f2d-1080-9e0e2005de92",
+		"cb371307-42d8-3335-caad-5f95d9393b47",
+		"67184d8b-5613-07bd-b6dd-9094616f1cf4"
 	],
 	"folders": [],
 	"timestamp": 1494136180312,
@@ -93,6 +96,25 @@
 			"responses": []
 		},
 		{
+			"id": "5aa09429-3853-4f2d-1080-9e0e2005de92",
+			"headers": "access_token: a61251ae335a8541108466b19374f854acd8539d8400d4552afe49a5cf59fa1d\n",
+			"url": "0.0.0.0:8080/api/v1/orders",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495397713233,
+			"name": "Orders",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		},
+		{
 			"id": "5c031905-11fe-caf4-937b-637cd50395d2",
 			"headers": "access_token: 9017766dfacb704659f83fd43f8130eeb988d33075a87357caee086a4304fe5a\n",
 			"url": "0.0.0.0:8080/api/v1/profile",
@@ -111,6 +133,25 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {}
+		},
+		{
+			"id": "67184d8b-5613-07bd-b6dd-9094616f1cf4",
+			"headers": "access_token: a61251ae335a8541108466b19374f854acd8539d8400d4552afe49a5cf59fa1d\nContent-Type: application/json\n",
+			"url": "0.0.0.0:8080/api/v1/orders/checkout",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495397699185,
+			"name": "Checkout",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": [],
+			"rawModeData": "{\n\t\"card_number\" : \"12323123123123asdsad\",\n\t\"pin\"\t: \"123\",\n\t\"type\"  : \"visa\",\n\t\"items\" : [\n\t\t{\n\t\t\t\"product_id\" : \"1\",\n\t\t\t\"qty\"\t\t : 5\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"2\",\n\t\t\t\"qty\"\t\t : 3\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"4\",\n\t\t\t\"qty\"\t\t : 1\n\t\t}] \n}"
 		},
 		{
 			"id": "9058be91-2513-746f-ea6f-efed2378eaa6",
@@ -232,6 +273,26 @@
 			"helperAttributes": {}
 		},
 		{
+			"id": "cb371307-42d8-3335-caad-5f95d9393b47",
+			"headers": "access_token: 740a2576ce331f1d06bf417fb2111ed677292f1a55354fe91514b6965c89e0d6\n",
+			"url": "0.0.0.0:8080/api/v1/orders/1",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"data": null,
+			"dataMode": "params",
+			"name": "Specific Order",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495396070549,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
 			"id": "f37cedcf-1047-32a5-c2e1-a66a0e85d4fa",
 			"headers": "access_token: a7341d7e8592896c6df16244090b3fd1abde8bbbfa1eaca3e9263767a2f18d88\n",
 			"url": "0.0.0.0:8080/api/v1/deals",
@@ -260,7 +321,7 @@
 			"data": [
 				{
 					"key": "email",
-					"value": "shredhead94@gmail.com",
+					"value": "dihara@gmail.com",
 					"type": "text",
 					"enabled": true
 				},
@@ -275,7 +336,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1495368106423,
+			"time": 1495395825394,
 			"name": "Login",
 			"description": "",
 			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",

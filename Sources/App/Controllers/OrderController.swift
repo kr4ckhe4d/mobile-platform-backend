@@ -9,6 +9,7 @@
 import Vapor
 import Routing
 import HTTP
+import Foundation
 
 final class OrderController {
     
@@ -92,21 +93,46 @@ final class OrderController {
             return try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
         }
         
-        let deals = try Deal.all()
-        var jsonArray: [JSON] = []
-        
-        for deal in deals {
-            if let product = try Product.find(deal.product_id!), let store = try Store.find(deal.store_id!) {
-                jsonArray.append(JSON(["deal_id" : deal.id!,
-                                       "discount" : Node.init(deal.discount),
-                                       "start_date" : Node.init(deal.start_date),
-                                       "end_date" : Node.init(deal.end_date),
-                                       "store" : try store.makeNode(),
-                                       "product" : try product.makeNode()
-                    ]))
+        if let items = request.json!["items"]?.array {
+            
+            var qtyArray: [Int] = []
+            var productArray: [Product] = []
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            
+            var amount = 0
+            let status = 0 // not shipped
+            let date = formatter.string(from: Date())
+            
+            for item in items {
+                if let jsonItem = item as? JSON {
+                    if let pid = jsonItem["product_id"]?.string, let qty = jsonItem["qty"]?.int {
+                        if let product = try Product.find(pid) {
+                            amount = amount + product.price * qty
+                            
+                            qtyArray.append(qty)
+                            productArray.append(product)
+                        }
+                    }
+                }
             }
+            
+            var order = Order(amount: amount, date: date, status: status)
+            order.user_id = user?.id!
+            try order.save()
+            
+            for index in 0...(qtyArray.count - 1) {
+                var item = OrderItem(qty: qtyArray[index])
+                item.order_id = order.id!
+                item.product_id = productArray[index].id!
+                
+                try item.save()
+            }
+            
+            return try Response(status: .ok, json: JSON(["message" : "Successfully Checked Out!"]))
         }
         
-        return try jsonArray.makeJSON()
+        throw Abort.badRequest
     }
 }

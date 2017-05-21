@@ -44,14 +44,14 @@ drop.group("api") { api in
         
         v1.get("orders", ":order_id" , handler: orderController.order)
         
-        v1.get("orders", "checkout", handler: orderController.checkout)
+        v1.post("orders", "checkout", handler: orderController.checkout)
         
         v1.get("seed") { request in
             try User.seed()
             try Store.seed()
             try Product.seed()
             try Deal.seed()
-            try Order.seed()
+            //try Order.seed()
             
             return JSON(["status" : true])
         }

@@ -1,0 +1,247 @@
+{
+	"id": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+	"name": "CPMAD_Backend",
+	"description": "",
+	"order": [
+		"04bf5e1b-949d-dea9-3a0d-92e1a9573420",
+		"c3803cbc-b762-f202-2075-379e2f4bfaa4",
+		"f42fcf3d-a23b-a5d2-c4d1-d8270c5648db",
+		"b2d9eb69-54b1-2a1f-5799-9cdde177caab",
+		"9058be91-2513-746f-ea6f-efed2378eaa6",
+		"5c031905-11fe-caf4-937b-637cd50395d2",
+		"021da6f6-32ec-e8b1-b190-4bbf7177093f",
+		"f37cedcf-1047-32a5-c2e1-a66a0e85d4fa"
+	],
+	"folders": [],
+	"timestamp": 1494136180312,
+	"owner": "685569",
+	"public": false,
+	"requests": [
+		{
+			"id": "021da6f6-32ec-e8b1-b190-4bbf7177093f",
+			"headers": "access_token: 9d240fb3d21801f00ecde1c1e2ae2339dc174224edd4b04b1e887caf5f668035\n",
+			"url": "0.0.0.0:8080/api/v1/stores/5/deals",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495372438252,
+			"name": "Mapped Deals",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		},
+		{
+			"id": "04bf5e1b-949d-dea9-3a0d-92e1a9573420",
+			"headers": "access_token: a7341d7e8592896c6df16244090b3fd1abde8bbbfa1eaca3e9263767a2f18d88\n",
+			"url": "0.0.0.0:8080/api/v1/stores",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495374982668,
+			"name": "Stores",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		},
+		{
+			"id": "5c031905-11fe-caf4-937b-637cd50395d2",
+			"headers": "access_token: 9017766dfacb704659f83fd43f8130eeb988d33075a87357caee086a4304fe5a\n",
+			"url": "0.0.0.0:8080/api/v1/profile",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"data": null,
+			"dataMode": "params",
+			"name": "Profile",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495369731567,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "9058be91-2513-746f-ea6f-efed2378eaa6",
+			"headers": "",
+			"url": "0.0.0.0:8080/api/v1/signup",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "email",
+					"value": "shredhead94@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "fname",
+					"value": "Dihara",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lname",
+					"value": "Wijetunga",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "dob",
+					"value": "22/20/1994",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "street_address",
+					"value": "No.24, Rampart Cross Road",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "city",
+					"value": "colombo",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "postal",
+					"value": "10100",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "contact_no",
+					"value": "0718695696",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "country",
+					"value": "Sri Lanka",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495366470155,
+			"name": "Register",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		},
+		{
+			"id": "b2d9eb69-54b1-2a1f-5799-9cdde177caab",
+			"headers": "",
+			"url": "0.0.0.0:8080/api/v1/stores/5/products",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"data": null,
+			"dataMode": "params",
+			"name": "Mapped Products",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495225763127,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "c3803cbc-b762-f202-2075-379e2f4bfaa4",
+			"headers": "",
+			"url": "0.0.0.0:8080/api/v1/seed",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"data": null,
+			"dataMode": "params",
+			"name": "Seed",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495224400335,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "f37cedcf-1047-32a5-c2e1-a66a0e85d4fa",
+			"headers": "access_token: a7341d7e8592896c6df16244090b3fd1abde8bbbfa1eaca3e9263767a2f18d88\n",
+			"url": "0.0.0.0:8080/api/v1/deals",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495374968180,
+			"name": "Deals",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		},
+		{
+			"id": "f42fcf3d-a23b-a5d2-c4d1-d8270c5648db",
+			"headers": "Content-Type: application/json\n",
+			"url": "0.0.0.0:8080/api/v1/login",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "email",
+					"value": "shredhead94@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "test",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495368106423,
+			"name": "Login",
+			"description": "",
+			"collectionId": "62b6d47e-cae5-e637-e7a5-8134533ca498",
+			"responses": []
+		}
+	]
+}

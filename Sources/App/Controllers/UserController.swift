@@ -14,28 +14,51 @@ import Foundation
 final class UserController {
     
     func login(_ request: Request) throws -> ResponseRepresentable  {
-        guard let email = request.formData?["email"]?.string,
-              let password = request.formData?["password"]?.string else {
-                throw Abort.badRequest
-        }
-        
-        var user = try User.findByCredentials(email: email, password: password)
-        
-        if user != nil {
+        print(request)
+        if let bodyBytes = request.body.bytes {
             
-            let date = Date()
+            let string = String(bytes: bodyBytes, encoding: String.Encoding.utf8)
             
-            let hash = try drop.hash.make((user?.email)! + (user?.password)! + String.init(date.timeIntervalSince1970.doubleValue))
-            if let token = hash.string {
-                user?.access_token = token
-                try user?.save()
-                return JSON(["access_token" : Node.init(token)])
+            if let data = string!.data(using: .utf8) {
+                do {
+                    let jsonString = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+                    print(jsonString.allItems[1].1)
+                    
+                    let email = jsonString.allItems[1].1
+                        let password = jsonString.allItems[0].1
+                    
+//                        let email = jsonString["email"]?.string
+//                        let password = jsonString["password"]?.string
+                        
+                        var user = try User.findByCredentials(email: email as! String, password: password as! String)
+                        
+                        if user != nil {
+                            
+                            let date = Date()
+                            
+                            let hash = try drop.hash.make((user?.email)! + (user?.password)! + String.init(date.timeIntervalSince1970.doubleValue))
+                            if let token = hash.string {
+                                user?.access_token = token
+                                try user?.save()
+                                return JSON(["access_token" : Node.init(token)])
+                            }
+                        }
+                    
+                    
+
+                    
+                }
             }
         }
         
+
         return try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
     }
     
+    func logintest(_ request: Request) throws -> ResponseRepresentable{
+        print(request.formData)
+        return JSON(["foo" : "bar"])
+    }
     func signup(_ request: Request) throws -> ResponseRepresentable  {
         guard let email = request.formData?["email"]?.string,
               let password = request.formData?["password"]?.string,

@@ -5,6 +5,7 @@ import Routing
 let drop = Droplet()
 
 try drop.addProvider(VaporSQLite.Provider.self)
+drop.middleware.insert(CORSMiddleware(), at: 0)
 
 drop.preparations.append(User.self)
 drop.preparations.append(Store.self)
@@ -23,6 +24,8 @@ drop.group("api") { api in
     api.group("v1") { v1 in
         
         v1.post("login", handler: userController.login)
+        
+        v1.post("logintest", handler: userController.logintest)
         
         v1.post("signup", handler: userController.signup)
         

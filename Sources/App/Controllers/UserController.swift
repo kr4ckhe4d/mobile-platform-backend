@@ -26,10 +26,6 @@ final class UserController {
                     
                     let email = jsonString.allItems[1].1
                         let password = jsonString.allItems[0].1
-                    
-//                        let email = jsonString["email"]?.string
-//                        let password = jsonString["password"]?.string
-                        
                         var user = try User.findByCredentials(email: email as! String, password: password as! String)
                         
                         if user != nil {
@@ -43,10 +39,6 @@ final class UserController {
                                 return JSON(["access_token" : Node.init(token)])
                             }
                         }
-                    
-                    
-
-                    
                 }
             }
         }
@@ -60,37 +52,83 @@ final class UserController {
         return JSON(["foo" : "bar"])
     }
     func signup(_ request: Request) throws -> ResponseRepresentable  {
-        guard let email = request.formData?["email"]?.string,
-              let password = request.formData?["password"]?.string,
-              let fname = request.formData?["fname"]?.string,
-              let lname = request.formData?["lname"]?.string,
-              let dob = request.formData?["dob"]?.string,
-              let street_address = request.formData?["street_address"]?.string,
-              let country = request.formData?["country"]?.string,
-              let city = request.formData?["city"]?.string,
-              let postal = request.formData?["postal"]?.int,
-              let contact_no = request.formData?["contact_no"]?.int else {
-                throw Abort.badRequest
+        print(request)
+        if let bodyBytes = request.body.bytes {
+            
+            let string = String(bytes: bodyBytes, encoding: String.Encoding.utf8)
+            
+            if let data = string!.data(using: .utf8) {
+                do {
+                    let jsonString = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+                    print(jsonString.allItems[1].1)
+                    
+//                    let email = jsonString.allItems[1].1
+//                    let password = jsonString.allItems[0].1
+
+                    let email = jsonString.allItems[2].1
+                                  let password = jsonString.allItems[4].1
+                                  let fname = jsonString.allItems[0].1
+                                  let lname = jsonString.allItems[1].1
+                                  let dob = jsonString.allItems[3].1
+                                  let street_address = jsonString.allItems[5].1
+                                  let country = jsonString.allItems[6].1
+                                  let city = jsonString.allItems[7].1
+                                  let postal = jsonString.allItems[8].1
+                                  let contact_no = jsonString.allItems[9].1
+                    
+                    let existing = try User.findByCredentials(email: email as! String, password: password as! String)
+                    
+                            if existing != nil {
+                                return try Response(status: .badRequest, json: JSON(["error" : "User Already Exists"]))
+                            }
+                    
+                            var user = User(fname: fname as! String,
+                                            lname: lname as! String,
+                                            email: email as! String,
+                                            password: password as! String,
+                                            dob: dob as! String,
+                                            street_address: street_address as! String,
+                                            country: country as! String,
+                                            city: city as! String,
+                                            postal: 5,
+                                            contact_no: 0775866536)
+                            
+                            try user.save()
+                }
+            }
         }
-        
-        let existing = try User.findByCredentials(email: email, password: password)
-        
-        if existing != nil {
-            return try Response(status: .badRequest, json: JSON(["error" : "User Already Exists"]))
-        }
-        
-        var user = User(fname: fname,
-                        lname: lname,
-                        email: email,
-                        password: password,
-                        dob: dob,
-                        street_address: street_address,
-                        country: country,
-                        city: city,
-                        postal: postal,
-                        contact_no: contact_no)
-        
-        try user.save()
+
+//        guard let email = request.formData?["email"]?.string,
+//              let password = request.formData?["password"]?.string,
+//              let fname = request.formData?["fname"]?.string,
+//              let lname = request.formData?["lname"]?.string,
+//              let dob = request.formData?["dob"]?.string,
+//              let street_address = request.formData?["street_address"]?.string,
+//              let country = request.formData?["country"]?.string,
+//              let city = request.formData?["city"]?.string,
+//              let postal = request.formData?["postal"]?.int,
+//              let contact_no = request.formData?["contact_no"]?.int else {
+//                throw Abort.badRequest
+//        }
+//        
+//        let existing = try User.findByCredentials(email: email, password: password)
+//        
+//        if existing != nil {
+//            return try Response(status: .badRequest, json: JSON(["error" : "User Already Exists"]))
+//        }
+//        
+//        var user = User(fname: fname,
+//                        lname: lname,
+//                        email: email,
+//                        password: password,
+//                        dob: dob,
+//                        street_address: street_address,
+//                        country: country,
+//                        city: city,
+//                        postal: postal,
+//                        contact_no: contact_no)
+//        
+//        try user.save()
         
         return try Response(status: .ok, json: JSON(["message" : "Successfully Registered!"]))
     }

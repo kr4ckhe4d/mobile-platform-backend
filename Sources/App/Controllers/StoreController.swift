@@ -13,6 +13,7 @@ import HTTP
 final class StoreController {
     
     func stores(_ request: Request) throws -> ResponseRepresentable  {
+        print(request)
         guard let token = request.headers["access_token"]?.string else {
             return try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
         }

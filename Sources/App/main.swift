@@ -4,6 +4,8 @@ import Routing
 
 let drop = Droplet()
 
+drop.middleware.append(try CORSMiddleware(configuration: drop.config))
+
 try drop.addProvider(VaporSQLite.Provider.self)
 
 drop.preparations.append(User.self)

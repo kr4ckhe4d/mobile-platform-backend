@@ -33,7 +33,9 @@ final class UserController {
             }
         }
         
-        return try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
+        let response = try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
+        response.headers["Content-Type"] = "application/json"
+        return response
     }
     
     func signup(_ request: Request) throws -> ResponseRepresentable  {

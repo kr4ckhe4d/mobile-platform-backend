@@ -47,9 +47,9 @@ final class UserController {
         return try Response(status: .unauthorized, json: JSON(["error" : "Unauthorized"]))
     }
     
-    func logintest(_ request: Request) throws -> ResponseRepresentable{
+    func domTypes(_ request: Request) throws -> ResponseRepresentable{
         print(request.formData)
-        return JSON(["foo" : "bar"])
+        return JSON([["name" : "Registration Type"],["name": "Business Type"]])
     }
     func signup(_ request: Request) throws -> ResponseRepresentable  {
         print(request)

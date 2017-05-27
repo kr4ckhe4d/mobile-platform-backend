@@ -25,7 +25,7 @@ drop.group("api") { api in
         
         v1.post("login", handler: userController.login)
         
-        v1.post("logintest", handler: userController.logintest)
+        v1.get("domTypes", handler: userController.domTypes)
         
         v1.post("signup", handler: userController.signup)
         
